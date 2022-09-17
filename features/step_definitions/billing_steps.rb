@@ -22,8 +22,9 @@ Then('the total amount is {float}') do |_expected_total_amount|
   pendiente
 end
 
-Given('a user {string} with {string} subscription') do |_user_email, _subscription_type|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^a user "(.*?)" with "(.*?)" subscription$/) do |user_email, subscription_type|
+  @user = User.create(user_email, user_email, 'somePassword!', subscription_type)
+  UserRepository.new.save(@user)
 end
 
 Given('{int} active offers') do |_offer_count|
