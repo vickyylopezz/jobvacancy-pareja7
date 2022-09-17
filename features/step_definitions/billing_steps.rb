@@ -43,8 +43,8 @@ Then('the amount to pay for the user {string} is {float}') do |user_email_input,
   expect(user['amount_to_pay']).to eq expected_amount
 end
 
-Then('the total active offers are {int}') do |_expected_offer_count|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^the total active offers are (\d+)$/) do |expected_offer_count|
+  expect(@report_as_json['total_active_offers']).to eq expected_offer_count
 end
 
 Given('another user {string} with {string} susbcription') do |_user_email, _subscription_type|
