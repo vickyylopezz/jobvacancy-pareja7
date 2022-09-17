@@ -35,3 +35,10 @@ Feature: Corporate Billing Report
     And the amount to pay for the user "maria@maria.com" is 80.0
     And the total amount is 160.0
     And the total active offers are 10
+
+  Scenario: c5 - corporate subscription with 5 active offers and 5 inactive offers
+    Given 5 active offers
+    And 5 inactive offers
+    When I get the billing report
+    Then the amount to pay for the user "pepe@pepito.com" is 80.0
+    And the total active offers are 5
