@@ -29,7 +29,7 @@ end
 
 Given(/^(\d+) active offers$/) do |offer_count|
   offer_count.times do
-    @job_offer = JobOffer.new(title: job_title, location: 'a nice job', description: 'a nice job')
+    @job_offer = JobOffer.new(title: 'test', location: 'a nice job', description: 'a nice job')
     @job_offer.owner = UserRepository.new.first
     @job_offer.is_active = true
 
