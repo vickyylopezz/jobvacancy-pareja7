@@ -27,12 +27,20 @@ Given(/^a user "(.*?)" with "(.*?)" subscription$/) do |user_email, subscription
   UserRepository.new.save(@user)
 end
 
-Given('{int} active offers') do |_offer_count|
-  pending # Write code here that turns the phrase above into concrete actions
+Given(/^(\d+) active offers$/) do |offer_count|
+  offer_count.times do
+    @job_offer = JobOffer.new(title: job_title, location: 'a nice job', description: 'a nice job')
+    @job_offer.owner = UserRepository.new.first
+    @job_offer.is_active = true
+
+    JobOfferRepository.new.save @job_offer
+  end
 end
 
-Then('the amount to pay for the user {string} is {float}') do |_user_email, _expected_amount|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the amount to pay for the user {string} is {float}') do |user_email_input, expected_amount|
+  user = @report_as_json['items'].find { |item| item['user_email'] == user_email_input }
+
+  expect(user['amount_to_pay']).to eq expected_amount
 end
 
 Then('the total active offers are {int}') do |_expected_offer_count|
