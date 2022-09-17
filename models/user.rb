@@ -14,7 +14,7 @@ class User
     data[:name] = name
     data[:email] = email
     data[:password] = password
-    data[:subscription_type] = subscription_type
+    data[:subscription] = subscription_type
     User.new(data)
   end
 
@@ -30,7 +30,7 @@ class User
     @job_offers = data[:job_offers]
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
-    @subscription = data[:subscription_type]
+    @subscription = data[:subscription]
   end
 
   def has_password?(password)
