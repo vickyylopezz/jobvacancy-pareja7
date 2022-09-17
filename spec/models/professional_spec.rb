@@ -8,7 +8,7 @@ describe Professional do
       expect(amount_to_pay).to eq 0.0
     end
 
-    xit 'should be 30.0 when active offers are 4' do
+    it 'should be 30.0 when active offers are 4' do
       professional = described_class.new
       amount_to_pay = professional.amount_to_pay(4)
       expect(amount_to_pay).to eq 30.0
