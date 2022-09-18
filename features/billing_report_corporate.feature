@@ -26,7 +26,6 @@ Feature: Corporate Billing Report
     Then the amount to pay for the user "pepe@pepito.com" is 80.0
     And the total active offers are 10
 
-  @wip
   Scenario: c4 - corporate subscription with two user with 5 offers each
     Given 5 active offers
     And another user "maria@maria.com" with "corporate" subscription
@@ -37,7 +36,6 @@ Feature: Corporate Billing Report
     And the total amount is 160.0
     And the total active offers are 10
 
-  @wip
   Scenario: c5 - corporate subscription with 5 active offers and 5 inactive offers
     Given 5 active offers
     And 5 inactive offers
