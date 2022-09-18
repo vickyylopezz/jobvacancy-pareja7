@@ -49,7 +49,7 @@ Then(/^the total active offers are (\d+)$/) do |expected_offer_count|
   expect(@report_as_json['total_active_offers']).to eq expected_offer_count
 end
 
-Given('another user {string} with {string} susbcription') do |user_email, subscription_type|
+Given('another user {string} with {string} subscription') do |user_email, subscription_type|
   @user = User.create(user_email, user_email, 'somePassword!', subscription_type)
   UserRepository.new.save(@user)
 end
@@ -64,15 +64,7 @@ Given('{int} inactive offers') do |inactive_offer_count|
   end
 end
 
-Then('the billing for this user is {float}') do |_expected_amount|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Given('the user {string}') do |_user_email|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('another user with {string} susbcription') do |_subscription_type|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
