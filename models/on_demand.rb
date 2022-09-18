@@ -1,5 +1,6 @@
 class OnDemand
-  def amount_to_pay(_active_offers)
-    0.0
+  PRICE_PER_OFFER = 10.0
+  def amount_to_pay(active_offers)
+    active_offers * PRICE_PER_OFFER
   end
 end

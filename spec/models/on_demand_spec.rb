@@ -7,5 +7,11 @@ describe OnDemand do
       amount_to_pay = on_demand.amount_to_pay(0)
       expect(amount_to_pay).to eq 0.0
     end
+
+    it 'should be 10.0 when one offer is active' do
+      on_demand = described_class.new
+      amount_to_pay = on_demand.amount_to_pay(1)
+      expect(amount_to_pay).to eq 10.0
+    end
   end
 end

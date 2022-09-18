@@ -54,10 +54,6 @@ Given('another user {string} with {string} susbcription') do |user_email, subscr
   UserRepository.new.save(@user)
 end
 
-Given('the user {string} has {int} active offers') do |_user_email, _active_offer_count|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Given('{int} inactive offers') do |inactive_offer_count|
   inactive_offer_count.times do
     @job_offer = JobOffer.new(title: 'test', location: 'a nice job', description: 'a nice job')
