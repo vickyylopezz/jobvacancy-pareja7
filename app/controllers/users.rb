@@ -8,7 +8,7 @@ JobVacancy::App.controllers :users do
     password_confirmation = params[:user][:password_confirmation]
     params[:user].reject! { |k, _| k == 'password_confirmation' }
 
-    params[:user][:subscription] = Professional.new
+    params[:user][:subscription] = 'professional'
     @user = User.new(params[:user])
 
     if params[:user][:password] == password_confirmation

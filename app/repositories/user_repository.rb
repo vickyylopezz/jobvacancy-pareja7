@@ -7,6 +7,10 @@ class UserRepository < BaseRepository
     load_object(row) unless row.nil?
   end
 
+  def subscription_per_email
+    dataset.map(%i[email subscription])
+  end
+
   protected
 
   def changeset(user)

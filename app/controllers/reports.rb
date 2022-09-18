@@ -1,7 +1,7 @@
 JobVacancy::App.controllers :reports, provides: [:json] do
   get :billing do
-    repo = JobOfferRepository.new
-    offer_counter = OfferCounter.new(repo)
+    job_offer_repo = JobOfferRepository.new
+    offer_counter = OfferCounter.new(job_offer_repo)
     amount_to_pay = offer_counter.count_active > 5 ? 44.0 : 30.0
     report = {
       items: [
