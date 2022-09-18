@@ -6,22 +6,16 @@ JobVacancy::App.controllers :reports, provides: [:json] do
     user_repo = UserRepository.new
     biller = Biller.new
 
-    total_active_offers = offer_counter.count_active
+    parser = ParseReportInformation.new
+    items = parser.parse_items(biller, offer_counter, user_repo)
+    report_generator.add_key_to_report('items', items)
 
-    total_amount = 0
-    # TO-DO: Refactoring to accomplish SOLID principle
-    subscription_per_email = user_repo.subscription_per_email
-    puts subscription_per_email.to_s
-    subscription_per_email.each do |user_data|
-      user = user_repo.find_by_email(user_data[0])
-      user_data.push(offer_counter.count_active_for(user&.id))
-      user_data.push(biller.calculate_amount_to_pay(offer_counter.count_active_for(user&.id),
-                                                    SubscriptionFactory.new.create(user_data[1])))
-      total_amount += biller.calculate_amount_to_pay(offer_counter.count_active_for(user&.id),
-                                                     SubscriptionFactory.new.create(user_data[1]))
-    end
+    total_active_offers = parser.parse_total_active_offers(offer_counter)
+    report_generator.add_key_to_report('total_active_offers', total_active_offers)
 
-    report = report_generator.create_report(subscription_per_email, total_active_offers, total_amount)
-    return report.to_json
+    total_amount = parser.parse_total_amount(biller, offer_counter, user_repo)
+    report_generator.add_key_to_report('total_amount', total_amount)
+
+    return report_generator.report.to_json
   end
 end
