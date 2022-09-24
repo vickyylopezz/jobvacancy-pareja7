@@ -7,8 +7,8 @@ class UserRepository < BaseRepository
     load_object(row) unless row.nil?
   end
 
-  def subscription_per_email
-    dataset.map(%i[email subscription])
+  def emails
+    dataset.select_map(:email)
   end
 
   def load_object(a_record)

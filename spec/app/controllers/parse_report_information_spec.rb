@@ -5,11 +5,15 @@ describe 'ParseReportInformation' do
     [{ user_email: 'pepe@pepito.com', subscription: 'professional', active_offers_count: 0,
        amount_to_pay: 30.0 }]
   end
-  let(:user) { User.create('pepe@pepito.com', 'pepe@pepito.com', '123456', 'professional') }
+  let(:user) do
+    user = User.create('pepe@pepito.com', 'pepe@pepito.com', '123456', 'professional')
+    user.assign_subscription(SubscriptionFactory.new.create('professional'))
+    user
+  end
 
   describe 'parse_items' do
     it 'parse a user with no active offers' do
-      repo = instance_double('user_repo', subscription_per_email: [['pepe@pepito.com', 'professional']],
+      repo = instance_double('user_repo', emails: ['pepe@pepito.com'],
                                           find_by_email: user)
       job_offer_repo = instance_double('offer_repo', all_active: [], all_active_for: [])
       offer_counter = OfferCounter.new(job_offer_repo)
@@ -27,7 +31,7 @@ describe 'ParseReportInformation' do
 
   describe 'parse_total_amount' do
     it 'parse a user with no active offers should be 30.0' do
-      repo = instance_double('user_repo', subscription_per_email: [['pepe@pepito.com', 'professional']],
+      repo = instance_double('user_repo', emails: [['pepe@pepito.com', 'professional']],
                                           find_by_email: user)
       job_offer_repo = instance_double('offer_repo', all_active: [], all_active_for: [])
       offer_counter = OfferCounter.new(job_offer_repo)
