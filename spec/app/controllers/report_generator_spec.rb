@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe ReportGenerator do
+describe 'ReportGenerator' do
   describe 'add_key_to_report' do
     it 'should generate a report with one key' do
-      report = described_class.new
+      report = ReportGenerator.new
       report.add_key_to_report(:hola, 'chau')
       expect(report.report).to eq({ hola: 'chau' })
     end
 
     it 'should generate a report with two keys' do
-      report = described_class.new
+      report = ReportGenerator.new
       report.add_key_to_report(:hola, 'chau')
       report.add_key_to_report(:numero, 5)
       expect(report.report).to eq({ hola: 'chau', numero: 5 })

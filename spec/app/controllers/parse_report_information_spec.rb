@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ParseReportInformation do
+describe 'ParseReportInformation' do
   let(:expected) do
     [{ user_email: 'pepe@pepito.com', subscription: 'professional', active_offers_count: 0,
        amount_to_pay: 30.0 }]
@@ -13,7 +13,7 @@ describe ParseReportInformation do
                                           find_by_email: user)
       job_offer_repo = instance_double('offer_repo', all_active: [], all_active_for: [])
       offer_counter = OfferCounter.new(job_offer_repo)
-      expect(described_class.new.parse_items(Biller.new, offer_counter, repo)).to eq expected
+      expect(ParseReportInformation.new.parse_items(Biller.new, offer_counter, repo)).to eq expected
     end
   end
 
@@ -21,7 +21,7 @@ describe ParseReportInformation do
     it 'parse two active offers' do
       job_offer_repo = instance_double('offer_repo', all_active: [1, 2])
       offer_counter = OfferCounter.new(job_offer_repo)
-      expect(described_class.new.parse_total_active_offers(offer_counter)).to eq 2
+      expect(ParseReportInformation.new.parse_total_active_offers(offer_counter)).to eq 2
     end
   end
 
@@ -31,7 +31,7 @@ describe ParseReportInformation do
                                           find_by_email: user)
       job_offer_repo = instance_double('offer_repo', all_active: [], all_active_for: [])
       offer_counter = OfferCounter.new(job_offer_repo)
-      expect(described_class.new.parse_total_amount(Biller.new, offer_counter, repo)).to eq 30.0
+      expect(ParseReportInformation.new.parse_total_amount(Biller.new, offer_counter, repo)).to eq 30.0
     end
   end
 end
