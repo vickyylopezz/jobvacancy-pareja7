@@ -6,8 +6,8 @@ JobVacancy::App.controllers :reports, provides: [:json] do
     user_repo = UserRepository.new
     biller = Biller.new
 
-    parser = ParseReportInformation.new
-    items = parser.parse_items(biller, offer_counter, user_repo)
+    parser = ReportItemView.new
+    items = parser.generate_items_view(biller, offer_counter, user_repo)
     report_generator.add_key_to_report('items', items)
 
     total_active_offers = parser.parse_total_active_offers(offer_counter)
