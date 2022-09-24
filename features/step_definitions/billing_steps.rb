@@ -24,6 +24,7 @@ end
 
 Given(/^a user "(.*?)" with "(.*?)" subscription$/) do |user_email, subscription_type|
   @user = User.create(user_email, user_email, 'somePassword!', subscription_type)
+  @user.assign_subscription(SubscriptionFactory.new.create(subscription_type))
   user_repo = UserRepository.new
   user_repo.delete_all
   user_repo.save(@user)
@@ -51,6 +52,7 @@ end
 
 Given('another user {string} with {string} subscription') do |user_email, subscription_type|
   @user = User.create(user_email, user_email, 'somePassword!', subscription_type)
+  @user.assign_subscription(SubscriptionFactory.new.create(subscription_type))
   UserRepository.new.save(@user)
 end
 
@@ -62,12 +64,4 @@ Given('{int} inactive offers') do |inactive_offer_count|
 
     JobOfferRepository.new.save @job_offer
   end
-end
-
-Given('the user {string}') do |_user_email|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then('the amount to pay for the user {string} is {float}.') do |_user_email, _expected_amount|
-  pending # Write code here that turns the phrase above into concrete actions
 end
