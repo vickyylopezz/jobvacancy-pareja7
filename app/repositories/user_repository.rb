@@ -11,6 +11,13 @@ class UserRepository < BaseRepository
     dataset.map(%i[email subscription])
   end
 
+  def load_object(a_record)
+    user = super
+    subscription = SubscriptionFactory.new.create(user.subscription)
+    user.assign_subscription(subscription)
+    user
+  end
+
   protected
 
   def changeset(user)
