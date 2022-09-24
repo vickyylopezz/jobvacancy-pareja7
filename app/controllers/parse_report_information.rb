@@ -6,7 +6,7 @@ class ParseReportInformation
     items = []
     emails.each do |email|
       user = user_repo.find_by_email(email)
-      active_offers = offer_counter.count_active_for(user&.id)
+      active_offers = offer_counter.count_active_for(user)
       amount_to_pay = biller.calculate_amount_to_pay(active_offers, user&.subscription_type)
       items.push(parse_item(user&.email, user&.subscription, active_offers, amount_to_pay))
     end
@@ -31,7 +31,7 @@ class ParseReportInformation
     total_amount = 0
     emails.each do |email|
       user = user_repo.find_by_email(email)
-      amount_to_pay = biller.calculate_amount_to_pay(offer_counter.count_active_for(user&.id),
+      amount_to_pay = biller.calculate_amount_to_pay(offer_counter.count_active_for(user),
                                                      user&.subscription_type)
       total_amount += amount_to_pay
     end

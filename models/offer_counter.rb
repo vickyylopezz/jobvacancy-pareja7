@@ -7,7 +7,7 @@ class OfferCounter
     @repo.all_active.size
   end
 
-  def count_active_for(user_id)
-    @repo.all_active_for(user_id).size
+  def count_active_for(user)
+    @repo.all_active_for(user).size
   end
 end
