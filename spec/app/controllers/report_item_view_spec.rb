@@ -20,22 +20,4 @@ describe 'ParseReportInformation' do
       expect(ReportItemView.new.generate_items_view(Biller.new, offer_counter, repo)).to eq expected
     end
   end
-
-  describe 'parse_total_active_offers' do
-    it 'parse two active offers' do
-      job_offer_repo = instance_double('offer_repo', all_active: [1, 2])
-      offer_counter = OfferCounter.new(job_offer_repo)
-      expect(ReportItemView.new.parse_total_active_offers(offer_counter)).to eq 2
-    end
-  end
-
-  describe 'parse_total_amount' do
-    it 'parse a user with no active offers should be 30.0' do
-      repo = instance_double('user_repo', emails: [['pepe@pepito.com', 'professional']],
-                                          find_by_email: user)
-      job_offer_repo = instance_double('offer_repo', all_active: [], all_active_for: [])
-      offer_counter = OfferCounter.new(job_offer_repo)
-      expect(ReportItemView.new.parse_total_amount(Biller.new, offer_counter, repo)).to eq 30.0
-    end
-  end
 end

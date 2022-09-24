@@ -19,20 +19,4 @@ class ReportItemView
       amount_to_pay: amount_to_pay
     }
   end
-
-  def parse_total_active_offers(offer_counter)
-    offer_counter.count_active
-  end
-
-  def parse_total_amount(biller, offer_counter, user_repo)
-    emails = user_repo.emails
-    total_amount = 0
-    emails.each do |email|
-      user = user_repo.find_by_email(email)
-      amount_to_pay = biller.calculate_amount_to_pay(offer_counter.count_active_for(user),
-                                                     user&.subscription_type)
-      total_amount += amount_to_pay
-    end
-    total_amount
-  end
 end

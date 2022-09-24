@@ -2,6 +2,10 @@ class UserRepository < BaseRepository
   self.table_name = :users
   self.model_class = 'User'
 
+  def users
+    load_collection dataset
+  end
+
   def find_by_email(email)
     row = dataset.first(email: email)
     load_object(row) unless row.nil?
